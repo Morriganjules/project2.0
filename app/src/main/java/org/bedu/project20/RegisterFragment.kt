@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 
@@ -43,10 +45,47 @@ class RegisterFragment : Fragment() {
         telefonoLayout = view.findViewById(R.id.telefono)
         contraseñaLayout = view.findViewById(R.id.passwordReg)
 
+        btnRegistrar.setOnClickListener{
+            if(validarNombre(nombre) && validarCorreo(correo) && validarTelefono(telefono) && validarContraseña(contraseña)){
+            val action: NavDirections = RegisterFragmentDirections.actionRegisterFragmentToInicioFragment()
+            findNavController().navigate(action)}
+            else {
+                if(!validarNombre(nombre)){
+                    nombreLayout.isErrorEnabled
+                    nombreLayout.error = "Ingrese su nombre"
+                } else if (!validarCorreo(correo)){
+                    correoLayout.isErrorEnabled
+                    correoLayout.error = "Ingrese su correo"
+                } else if (!validarTelefono(telefono)){
+                    telefonoLayout.isErrorEnabled
+                    telefonoLayout.error = "Ingrese un telefono"
+                } else if (!validarContraseña(contraseña)){
+                    contraseñaLayout.isErrorEnabled
+                    contraseñaLayout.error = "ingrese una contraseña"
+                }
 
+            }
+        }
 
 
         return view
+    }
+
+    private fun validarNombre (nombre: EditText):Boolean{
+        val nombreInput = nombre.text.toString()
+        return !nombreInput.isEmpty()
+    }
+    private fun validarCorreo(email: EditText): Boolean{
+        val emailInput = email.text.toString()
+        return !emailInput.isEmpty() && emailInput.contains("@")
+    }
+    private fun validarTelefono(telefono: EditText): Boolean{
+        val telefonoInput = telefono.text.toString()
+        return !telefonoInput.isEmpty()
+    }
+    private fun validarContraseña(contraseña:EditText):Boolean{
+        val contraseñaInput = contraseña.text.toString()
+        return !contraseñaInput.isEmpty()
     }
 
 
