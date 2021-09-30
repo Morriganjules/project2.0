@@ -183,12 +183,13 @@
         android:id="@+id/btnCarrito"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
         android:text="Agregar a carrito"
         app:layout_constraintBottom_toTopOf="@+id/guideline28"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline27"
-        app:layout_constraintVertical_bias="0.733" />
+        app:layout_constraintVertical_bias="0.533" />
 
     <TextView
         android:id="@+id/descripcion"
