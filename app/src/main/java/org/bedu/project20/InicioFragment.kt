@@ -42,13 +42,18 @@ class InicioFragment : Fragment() {
 
 
         btnLogin.setOnClickListener {
-            if(validateUsuario(usuario)){
+            if(validateUsuario(usuario) && validatePassword(password)){
                 val action: NavDirections = InicioFragmentDirections.actionInicioFragmentToMainActivity()
                 findNavController().navigate(action)
 
             }else{
+                if(!validateUsuario(usuario)){
                 usuarioLayout.isErrorEnabled()
-                usuarioLayout.setError("Ingrese un usuario valido")
+                usuarioLayout.setError("Ingrese un usuario valido")}
+                else {
+                    passwordLayout.isErrorEnabled()
+                    passwordLayout.setError("Ingrese su contraseña")
+                }
             }
 
         }
@@ -67,5 +72,14 @@ class InicioFragment : Fragment() {
     }
     return false
   }
+    private fun validatePassword(passwprd: EditText):Boolean {
+        val passwprdInput = passwprd.text.toString()
+        if (!passwprdInput.isEmpty()) {
+            return true
+        }
+        return false
+    }
+
+
 }
 
