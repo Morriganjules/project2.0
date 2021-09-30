@@ -29,17 +29,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        replaceFragment(listFragment)
-        val bottomNavigation: BottomNavigationView = findViewById(R.id.btmMenu)
-        bottomNavigation.setOnNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.homeFragment -> replaceFragment(listFragment)
-                R.id.carritoFragment -> replaceFragment(carritoFragment)
-                R.id.perfilFragment -> replaceFragment(perfilFragment)
 
-            }
-            true
-        }
 
     }
     /*metodo para funcionalidades AppBar */
@@ -65,14 +55,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    private fun replaceFragment(fragment:Fragment){
-        if(fragment != null){
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragmentContainerMenu, fragment)
-            transaction.commit()
-        }
-
-    }
+   
 
 
 }
