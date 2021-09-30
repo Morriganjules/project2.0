@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_list" >
         <action
             android:id="@+id/action_listFragment_to_descriptionFragment"
-            app:destination="@id/descriptionFragment" />
+            app:destination="@id/descriptionFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/descriptionFragment"
@@ -24,7 +28,11 @@
             app:argType="org.bedu.project20.Product" />
         <action
             android:id="@+id/action_descriptionFragment_to_carritoFragment"
-            app:destination="@id/carritoFragment" />
+            app:destination="@id/carritoFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/carritoFragment"
