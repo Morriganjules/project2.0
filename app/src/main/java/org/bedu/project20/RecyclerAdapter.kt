@@ -6,16 +6,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.NavController
-import androidx.navigation.NavDirections
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
 
-class RecyclerAdapter(val products : List<Product>, fm: FragmentManager) :
+class RecyclerAdapter(val products: List<Product>, val listener: (Product) -> Unit) :
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view){
@@ -30,7 +25,7 @@ class RecyclerAdapter(val products : List<Product>, fm: FragmentManager) :
             title.text = producto.title
             rate.rating = producto.rate
             stock.text = producto.category
-            precio.text = "\$ ${producto.price.toString()}"
+            precio.text = "$ ${producto.price}"
             Picasso.get().load(producto.image).into(imagen)
             descripcion = producto.description
 
@@ -56,10 +51,17 @@ class RecyclerAdapter(val products : List<Product>, fm: FragmentManager) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = products[position]
         holder.bind(product)
-        val action: NavDirections = ListFragmentDirections.actionListFragmentToDescriptionFragment(product)
 
-        holder.itemView.setOnClickListener{view ->
-            view.findNavController().navigate(action)
+        //FORMA PREVIA DE HACERLO PERO QUE EJECUTABA LA ACCION DESDE EL RECYCLER
+        //val action: NavDirections = ListFragmentDirections.actionListFragmentToDescriptionFragment(product)
+
+        holder.itemView.setOnClickListener{
+        listener(product)
+
+            //FORMA PREVIA DE HACERLO PERO QUE EJECUTABA LA ACCION DESDE EL RECYCLER
+        /*view -> view.findNavController().navigate(action)*/
+
+
         }
     }
 

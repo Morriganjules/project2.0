@@ -7,8 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.ViewStub
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationMenu
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
@@ -22,13 +25,13 @@ import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
-    private val listFragment = ListFragment()
-    private val carritoFragment = CarritoFragment()
-    private val perfilFragment = PerfilFragment()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
 
     }
@@ -54,8 +57,6 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
-
-   
 
 
 }

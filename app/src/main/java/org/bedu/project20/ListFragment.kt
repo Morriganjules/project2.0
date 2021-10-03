@@ -28,10 +28,16 @@ class ListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_list, container, false)
+        setUpRecyclerView(view)
         val recycler = view.findViewById<RecyclerView>(R.id.recycler)
         recycler.layoutManager= LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+
+        //FORMA PREVIA DE HACERLO PERO QUE EJECUTABA LA ACCION DESDE EL RECYCLER
+
+        /*val recycler = view.findViewById<RecyclerView>(R.id.recycler)
+        recycler.layoutManager= LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         val FragmentManager = requireFragmentManager()
-        recycler.adapter = RecyclerAdapter(getProducts(requireActivity()), FragmentManager)
+        recycler.adapter = RecyclerAdapter(getProducts(requireActivity()), FragmentManager)*/
 
 
         return view
@@ -54,5 +60,14 @@ class ListFragment : Fragment() {
         val jsonString = getJsonDataFromAsset(context)
         val listProductType = object : TypeToken<List<Product>>() {}.type
         return Gson().fromJson(jsonString, listProductType)
+    }
+
+    private fun setUpRecyclerView(view : View) {
+        val recycler = view.findViewById<RecyclerView>(R.id.recycler)
+        val rAdapter = RecyclerAdapter(getProducts(requireContext())) { product ->
+            val action = ListFragmentDirections.actionListFragmentToDescriptionFragment(product)
+            findNavController().navigate(action)
+        }
+        recycler.adapter = rAdapter
     }
 }

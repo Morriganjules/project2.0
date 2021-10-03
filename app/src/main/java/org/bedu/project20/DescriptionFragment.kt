@@ -45,7 +45,7 @@ class DescriptionFragment : Fragment() {
         view.findViewById<TextView>(R.id.nameProduct).text = args.product.title
         view.findViewById<RatingBar>(R.id.ratingBar).rating = args.product.rate
         view.findViewById<TextView>(R.id.stock).text = args.product.category
-        view.findViewById<TextView>(R.id.precio).text = "$ ${args.product.price.toString()}"
+        view.findViewById<TextView>(R.id.precio).text = "$ ${args.product.price}"
         view.findViewById<TextView>(R.id.descripcion).text = args.product.description
         view.findViewById<TextView>(R.id.precioCuotas).text = args.product.price.toString()
         imagen = view.findViewById(R.id.imgProducto)
