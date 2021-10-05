@@ -53,8 +53,14 @@ class DescriptionFragment : Fragment() {
         btnCarrito = view.findViewById(R.id.btnCarrito)
         btnCarrito.setOnClickListener{ findNavController().navigate(action)}
 
+        super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).hideBottomNav()
+
         return view
     }
-
+   override fun onDetach() {
+        super.onDetach()
+        (activity as MainActivity).showBottomNav()
+    }
 
 }

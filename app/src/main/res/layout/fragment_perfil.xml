@@ -3,16 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PerfilFragment">
+    tools:context=".PerfilFragment"
+    android:layout_gravity="center"
+    >
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:text="@string/perfil"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        />
+        android:textStyle="bold" />
 
 </FrameLayout>

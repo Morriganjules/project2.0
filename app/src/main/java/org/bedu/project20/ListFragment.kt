@@ -6,16 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.IOException
 
 
 class ListFragment : Fragment() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +32,11 @@ class ListFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_list, container, false)
         setUpRecyclerView(view)
-        val recycler = view.findViewById<RecyclerView>(R.id.recycler)
-        recycler.layoutManager= LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+
+
+
+       //val recycler = view.findViewById<RecyclerView>(R.id.recycler)
+        //recycler.layoutManager= LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
         //FORMA PREVIA DE HACERLO PERO QUE EJECUTABA LA ACCION DESDE EL RECYCLER
 
@@ -64,6 +70,7 @@ class ListFragment : Fragment() {
 
     private fun setUpRecyclerView(view : View) {
         val recycler = view.findViewById<RecyclerView>(R.id.recycler)
+        recycler.layoutManager= LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         val rAdapter = RecyclerAdapter(getProducts(requireContext())) { product ->
             val action = ListFragmentDirections.actionListFragmentToDescriptionFragment(product)
             findNavController().navigate(action)

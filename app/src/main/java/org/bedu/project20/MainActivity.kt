@@ -7,11 +7,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewStub
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationMenu
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
@@ -21,15 +28,49 @@ import com.google.gson.reflect.TypeToken
 import java.io.IOException
 
 
-
-
-
 class MainActivity : AppCompatActivity() {
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.btmMenu)
+
+        //bottomNavigation.setupWithNavController(navController)
+
+        //metodos para funcionalidades NavBar
+
+
+        val listFragment = ListFragment()
+        val carritoFragment = CarritoFragment()
+        val perfilFragment = PerfilFragment()
+
+
+        //bottom = findViewById(R.id.btmMenu)
+
+        bottomNavigation.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.listFragment -> {
+                    makeCurrentFragment(listFragment)
+                    true
+                }
+                R.id.carritoFragment -> {
+                    makeCurrentFragment(carritoFragment)
+                    true
+                }
+                R.id.perfilFragment -> {
+                    makeCurrentFragment(perfilFragment)
+                    true
+                }
+
+            }
+            true
+
+        }
+
 
 
 
@@ -56,6 +97,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return true
+    }
+
+    //function para poder generar la transaction en el Bottom navBar
+
+    private fun makeCurrentFragment (fragment: Fragment)= supportFragmentManager.beginTransaction().apply {
+        replace(R.id.fragmentContainerMenu, fragment)
+        commit()
+    }
+
+    fun hideBottomNav() {
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.btmMenu)
+        bottomNavigation.visibility = View.GONE
+    }
+
+    fun showBottomNav() {
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.btmMenu)
+        bottomNavigation.visibility = View.VISIBLE
     }
 
 
